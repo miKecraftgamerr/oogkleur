@@ -12,67 +12,54 @@
       var inLaw2Color = document.getElementById('inLaw2').value.toLowerCase();
 
       // Genetische berekeningen op basis van de gegeven tabel
-      var kansOpBruin = 0;
-      var kansOpGroen = 0;
-      var kansOpBlauw = 0;
+      var kansOpBruinOuder = 0;
+      var kansOpGroenOuder = 0;
+      var kansOpBlauwOuder = 0;
 
       // Bruin + bruin
       if ((parent1Color === "bruin" && parent2Color === "bruin")) {
-        kansOpBruin = 75;
-        kansOpGroen = 18.75;
-        kansOpBlauw = 6.25;
+        kansOpBruinOuder = 75;
+        kansOpGroenOuder = 18.75;
+        kansOpBlauwOuder = 6.25;
       }
 
       // Groen + bruin of Bruin + groen
       else if ((parent1Color === "groen" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "groen")) {
-        kansOpBruin = 50;
-        kansOpGroen = 37.5;
-        kansOpBlauw = 12.5;
+        kansOpBruinOuder = 50;
+        kansOpGroenOuder = 37.5;
+        kansOpBlauwOuder = 12.5;
       }
 
       // Blauw + bruin of Bruin + blauw
       else if ((parent1Color === "blauw" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "blauw")) {
-        kansOpBruin = 50;
-        kansOpGroen = 0;
-        kansOpBlauw = 50;
+        kansOpBruinOuder = 50;
+        kansOpGroenOuder = 0;
+        kansOpBlauwOuder = 50;
       }
 
       // Groen + groen
       else if (parent1Color === "groen" && parent2Color === "groen") {
-        kansOpBruin = 0.01; // Minder dan 1%
-        kansOpGroen = 75;
-        kansOpBlauw = 25;
+        kansOpBruinOuder = 0.01; // Minder dan 1%
+        kansOpGroenOuder = 75;
+        kansOpBlauwOuder = 25;
       }
 
       // Groen + blauw of Blauw + groen
       else if ((parent1Color === "groen" && parent2Color === "blauw") || (parent1Color === "blauw" && parent2Color === "groen")) {
-        kansOpBruin = 0;
-        kansOpGroen = 50;
-        kansOpBlauw = 50;
+        kansOpBruinOuder = 0;
+        kansOpGroenOuder = 50;
+        kansOpBlauwOuder = 50;
       }
 
       // Blauw + blauw
       else if (parent1Color === "blauw" && parent2Color === "blauw") {
-        kansOpBruin = 0;
-        kansOpGroen = 1;
-        kansOpBlauw = 99;
+        kansOpBruinOuder = 0;
+        kansOpGroenOuder = 1;
+        kansOpBlauwOuder = 99;
       }
 
-      // Toon resultaat
-      showResults(parent1Color, kansOpBruin, kansOpGroen, kansOpBlauw);
-    }
-
-    function showResults(parentColor, kansOpBruin, kansOpGroen, kansOpBlauw) {
-      var resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = '<h2>Kansen op Oogkleuren:</h2>';
-      
-      // Toon de kansen voor de ouder
-      resultDiv.innerHTML += '<h3>Oogkleur ' + capitalizeFirstLetter(parentColor) + ':</h3>';
-      resultDiv.innerHTML += '<ul>';
-      resultDiv.innerHTML += '<li>Bruin: ' + kansOpBruin.toFixed(2) + '%</li>';
-      resultDiv.innerHTML += '<li>Groen: ' + kansOpGroen.toFixed(2) + '%</li>';
-      resultDiv.innerHTML += '<li>Blauw: ' + kansOpBlauw.toFixed(2) + '%</li>';
-      resultDiv.innerHTML += '</ul>';
+      // Toon resultaat voor de ouders
+      showResults("Oogkleur Mama", parent1Color, kansOpBruinOuder, kansOpGroenOuder, kansOpBlauwOuder);
 
       // Voeg hier je eigen genetische berekeningslogica toe voor de kinderen
       // Bijvoorbeeld, je zou hier een functie kunnen aanroepen die de kans op oogkleuren van de kinderen berekent
@@ -84,11 +71,19 @@
       var kansOpBlauwKind = Math.random() * 100;
 
       // Toon de kansen voor de kinderen
-      resultDiv.innerHTML += '<h3>Kansen op Oogkleuren van de Kinderen:</h3>';
+      showResults("Oogkleur Kinderen", "Willekeurig", kansOpBruinKind, kansOpGroenKind, kansOpBlauwKind);
+    }
+
+    function showResults(ouderType, ouderColor, kansOpBruin, kansOpGroen, kansOpBlauw) {
+      var resultDiv = document.getElementById('result');
+      resultDiv.innerHTML += '<h2>Kansen op Oogkleuren:</h2>';
+      
+      // Toon de kansen voor de ouder
+      resultDiv.innerHTML += '<h3>' + ouderType + ' (' + capitalizeFirstLetter(ouderColor) + '):</h3>';
       resultDiv.innerHTML += '<ul>';
-      resultDiv.innerHTML += '<li>Bruin: ' + kansOpBruinKind.toFixed(2) + '%</li>';
-      resultDiv.innerHTML += '<li>Groen: ' + kansOpGroenKind.toFixed(2) + '%</li>';
-      resultDiv.innerHTML += '<li>Blauw: ' + kansOpBlauwKind.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '<li>Bruin: ' + kansOpBruin.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '<li>Groen: ' + kansOpGroen.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '<li>Blauw: ' + kansOpBlauw.toFixed(2) + '%</li>';
       resultDiv.innerHTML += '</ul>';
     }
 
