@@ -26,21 +26,16 @@
     <button type="submit">Bereken De Oogkleuren</button>
   </form>
 
-  {% if child_eye_colors %}
+  {{- if child_eye_colors is defined -}}
     <div id="result">
       <h2>Mogelijke Oogkleuren van de Kinderen:</h2>
       <ul>
-        {% for color in child_eye_colors %}
+        {{- for color in child_eye_colors -}}
           <li>{{ color }}</li>
-        {% endfor %}
+        {{- endfor -}}
       </ul>
     </div>
-  {% else %}
-    <!-- Als er geen resultaten zijn -->
-    <div id="result">
-      <p>Geen resultaten beschikbaar.</p>
-    </div>
-  {% endif %}
+  {{- endif -}}
 
 </body>
 </html>
