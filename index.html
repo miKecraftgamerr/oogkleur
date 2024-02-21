@@ -5,16 +5,67 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oogkleur Berekenaar</title>
   <script>
+    function calculateEyeColors() {
+      var parent1Color = document.getElementById('parent1').value.toLowerCase();
+      var parent2Color = document.getElementById('parent2').value.toLowerCase();
+
+      // Genetische berekeningen op basis van de gegeven tabel
+      var kansOpBruin = 0;
+      var kansOpGroen = 0;
+      var kansOpBlauw = 0;
+
+      // Bruin + bruin
+      if ((parent1Color === "bruin" && parent2Color === "bruin")) {
+        kansOpBruin = 75;
+        kansOpGroen = 18.75;
+        kansOpBlauw = 6.25;
+      }
+
+      // Groen + bruin of Bruin + groen
+      else if ((parent1Color === "groen" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "groen")) {
+        kansOpBruin = 50;
+        kansOpGroen = 37.5;
+        kansOpBlauw = 12.5;
+      }
+
+      // Blauw + bruin of Bruin + blauw
+      else if ((parent1Color === "blauw" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "blauw")) {
+        kansOpBruin = 50;
+        kansOpGroen = 0;
+        kansOpBlauw = 50;
+      }
+
+      // Groen + groen
+      else if (parent1Color === "groen" && parent2Color === "groen") {
+        kansOpBruin = 0.01; // Minder dan 1%
+        kansOpGroen = 75;
+        kansOpBlauw = 25;
+      }
+
+      // Groen + blauw of Blauw + groen
+      else if ((parent1Color === "groen" && parent2Color === "blauw") || (parent1Color === "blauw" && parent2Color === "groen")) {
+        kansOpBruin = 0;
+        kansOpGroen = 50;
+        kansOpBlauw = 50;
+      }
+
+      // Blauw + blauw
+      else if (parent1Color === "blauw" && parent2Color === "blauw") {
+        kansOpBruin = 0;
+        kansOpGroen = 1;
+        kansOpBlauw = 99;
+      }
+
+      // Toon resultaat
+      showResults([kansOpBruin.toFixed(2) + "%", kansOpGroen.toFixed(2) + "%", kansOpBlauw.toFixed(2) + "%"]);
+    }
+
     function showResults(childEyeColors) {
       var resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = '<h2>Mogelijke Oogkleuren van de Kinderen:</h2><ul>';
+      resultDiv.innerHTML = '<h2>Kansen op Oogkleuren van de Kinderen:</h2><ul>';
 
-      if (childEyeColors) {
-        for (var i = 0; i < childEyeColors.length; i++) {
-          resultDiv.innerHTML += '<li>' + childEyeColors[i] + '</li>';
-        }
-      } else {
-        resultDiv.innerHTML += '<li>Geen resultaten beschikbaar.</li>';
+      for (var i = 0; i < childEyeColors.length; i++) {
+        resultDiv.innerHTML += '<li>' + childEyeColors[i] + '</li>';
       }
 
       resultDiv.innerHTML += '</ul>';
@@ -24,50 +75,24 @@
 <body>
   <h1>Oogkleur Berekenaar</h1>
 
-  <form method="POST" onsubmit="event.preventDefault(); calculateEyeColors();">
+  <form onsubmit="event.preventDefault(); calculateEyeColors();">
     <label for="parent1">Oogkleur Mama</label>
-    <select name="parent1" required>
-      <option value="Bruin">Bruin</option>
-      <option value="Groen">Groen</option>
-      <option value="Blauw">Blauw</option>
+    <select name="parent1" id="parent1" required>
+      <option value="bruin">Bruin</option>
+      <option value="groen">Groen</option>
+      <option value="blauw">Blauw</option>
     </select>
 
     <label for="parent2">Oogkleur Papa</label>
-    <select name="parent2" required>
-      <option value="Bruin">Bruin</option>
-      <option value="Groen">Groen</option>
-      <option value="Blauw">Blauw</option>
+    <select name="parent2" id="parent2" required>
+      <option value="bruin">Bruin</option>
+      <option value="groen">Groen</option>
+      <option value="blauw">Blauw</option>
     </select>
 
-    <button type="submit">Bereken De Oogkleuren</button>
+    <button type="submit">Bereken De Kansen</button>
   </form>
 
   <div id="result"></div>
-
-  <script>
-    function calculateEyeColors() {
-      // Plaats hier je genetische berekeningen
-
-      // Bijvoorbeeld:
-      var childEyeColors = ['Groen', 'Blauw'];  // Vervang dit met je eigen berekeningen
-
-      showResults(childEyeColors);
-    }
-
-    function showResults(childEyeColors) {
-      var resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = '<h2>Mogelijke Oogkleuren van de Kinderen:</h2><ul>';
-
-      if (childEyeColors) {
-        for (var i = 0; i < childEyeColors.length; i++) {
-          resultDiv.innerHTML += '<li>' + childEyeColors[i] + '</li>';
-        }
-      } else {
-        resultDiv.innerHTML += '<li>Geen resultaten beschikbaar.</li>';
-      }
-
-      resultDiv.innerHTML += '</ul>';
-    }
-  </script>
 </body>
 </html>
