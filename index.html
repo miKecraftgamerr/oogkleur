@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ffOogkleur Berekenaar</title>
+  <title>Oogkleur Berekenaar</title>
   <script>
     function calculateEyeColors() {
       var parent1Color = document.getElementById('parent1').value.toLowerCase();
@@ -11,38 +11,90 @@
       var inLaw1Color = document.getElementById('inLaw1').value.toLowerCase();
       var inLaw2Color = document.getElementById('inLaw2').value.toLowerCase();
 
-      // Genetische berekeningen op basis van de gegeven tabel voor jouw oogkleur
-      var kansOpJouwBruin = 0;
-      var kansOpJouwGroen = 0;
-      var kansOpJouwBlauw = 0;
+      // Genetische berekeningen op basis van de gegeven tabel
+      var kansOpBruin = 0;
+      var kansOpGroen = 0;
+      var kansOpBlauw = 0;
 
-      // Plaats hier je genetische berekeningen voor jouw oogkleur
-      // ...
+      // Bruin + bruin
+      if ((parent1Color === "bruin" && parent2Color === "bruin")) {
+        kansOpBruin = 75;
+        kansOpGroen = 18.75;
+        kansOpBlauw = 6.25;
+      }
 
-      // Genetische berekeningen op basis van de gegeven tabel voor oogkleur van je vrouw
-      var kansOpVrouwBruin = 0;
-      var kansOpVrouwGroen = 0;
-      var kansOpVrouwBlauw = 0;
+      // Groen + bruin of Bruin + groen
+      else if ((parent1Color === "groen" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "groen")) {
+        kansOpBruin = 50;
+        kansOpGroen = 37.5;
+        kansOpBlauw = 12.5;
+      }
 
-      // Plaats hier je genetische berekeningen voor oogkleur van je vrouw
-      // ...
+      // Blauw + bruin of Bruin + blauw
+      else if ((parent1Color === "blauw" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "blauw")) {
+        kansOpBruin = 50;
+        kansOpGroen = 0;
+        kansOpBlauw = 50;
+      }
 
-      // Toon resultaat voor jouw oogkleur
-      showResults('Jou', [kansOpJouwBruin.toFixed(2) + "%", kansOpJouwGroen.toFixed(2) + "%", kansOpJouwBlauw.toFixed(2) + "%"]);
+      // Groen + groen
+      else if (parent1Color === "groen" && parent2Color === "groen") {
+        kansOpBruin = 0.01; // Minder dan 1%
+        kansOpGroen = 75;
+        kansOpBlauw = 25;
+      }
 
-      // Toon resultaat voor oogkleur van je vrouw
-      showResults('Jouw Vrouw', [kansOpVrouwBruin.toFixed(2) + "%", kansOpVrouwGroen.toFixed(2) + "%", kansOpVrouwBlauw.toFixed(2) + "%"]);
+      // Groen + blauw of Blauw + groen
+      else if ((parent1Color === "groen" && parent2Color === "blauw") || (parent1Color === "blauw" && parent2Color === "groen")) {
+        kansOpBruin = 0;
+        kansOpGroen = 50;
+        kansOpBlauw = 50;
+      }
+
+      // Blauw + blauw
+      else if (parent1Color === "blauw" && parent2Color === "blauw") {
+        kansOpBruin = 0;
+        kansOpGroen = 1;
+        kansOpBlauw = 99;
+      }
+
+      // Toon resultaat
+      showResults(parent1Color, kansOpBruin, kansOpGroen, kansOpBlauw);
     }
 
-    function showResults(person, eyeColors) {
+    function showResults(parentColor, kansOpBruin, kansOpGroen, kansOpBlauw) {
       var resultDiv = document.getElementById('result');
-      resultDiv.innerHTML += '<h2>Kansen op Oogkleuren van ' + person + ':</h2><ul>';
-
-      resultDiv.innerHTML += '<li>Bruin: ' + eyeColors[0] + '</li>';
-      resultDiv.innerHTML += '<li>Groen: ' + eyeColors[1] + '</li>';
-      resultDiv.innerHTML += '<li>Blauw: ' + eyeColors[2] + '</li>';
-
+      resultDiv.innerHTML = '<h2>Kansen op Oogkleuren:</h2>';
+      
+      // Toon de kansen voor de ouder
+      resultDiv.innerHTML += '<h3>Oogkleur ' + capitalizeFirstLetter(parentColor) + ':</h3>';
+      resultDiv.innerHTML += '<ul>';
+      resultDiv.innerHTML += '<li>Bruin: ' + kansOpBruin.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '<li>Groen: ' + kansOpGroen.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '<li>Blauw: ' + kansOpBlauw.toFixed(2) + '%</li>';
       resultDiv.innerHTML += '</ul>';
+
+      // Voeg hier je eigen genetische berekeningslogica toe voor de kinderen
+      // Bijvoorbeeld, je zou hier een functie kunnen aanroepen die de kans op oogkleuren van de kinderen berekent
+      // en de resultaten weergeven op een vergelijkbare manier.
+
+      // In dit voorbeeld tonen we gewoon willekeurige kansen voor de kinderen
+      var kansOpBruinKind = Math.random() * 100;
+      var kansOpGroenKind = Math.random() * 100;
+      var kansOpBlauwKind = Math.random() * 100;
+
+      // Toon de kansen voor de kinderen
+      resultDiv.innerHTML += '<h3>Kansen op Oogkleuren van de Kinderen:</h3>';
+      resultDiv.innerHTML += '<ul>';
+      resultDiv.innerHTML += '<li>Bruin: ' + kansOpBruinKind.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '<li>Groen: ' + kansOpGroenKind.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '<li>Blauw: ' + kansOpBlauwKind.toFixed(2) + '%</li>';
+      resultDiv.innerHTML += '</ul>';
+    }
+
+    // Functie om de eerste letter van een woord te kapitaliseren
+    function capitalizeFirstLetter(word) {
+      return word.charAt(0).toUpperCase() + word.slice(1);
     }
   </script>
 </head>
