@@ -8,49 +8,34 @@
 <body>
   <h1>fOogkleur Berekenaar</h1>
 
-  <form id="eyeColorForm">
+  <form method="POST">
     <label for="parent1">Oogkleur Mama</label>
-    <select name="parent1" id="parent1" required>
+    <select name="parent1" required>
       <option value="Bruin">Bruin</option>
       <option value="Groen">Groen</option>
       <option value="Blauw">Blauw</option>
     </select>
 
     <label for="parent2">Oogkleur Papa</label>
-    <select name="parent2" id="parent2" required>
+    <select name="parent2" required>
       <option value="Bruin">Bruin</option>
       <option value="Groen">Groen</option>
       <option value="Blauw">Blauw</option>
     </select>
 
-    <button type="button" onclick="calculateEyeColors()">Bereken De Oogkleuren</button>
+    <button type="submit">Bereken De Oogkleuren</button>
   </form>
 
-  <div id="result"></div>
+  {% if child_eye_colors %}
+    <div id="result">
+      <h2>Mogelijke Oogkleuren van de Kinderen:</h2>
+      <ul>
+        {% for color in child_eye_colors %}
+          <li>{{ color }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
 
-  <script>
-    function calculateEyeColors() {
-      const parent1Color = document.getElementById('parent1').value.toLowerCase();
-      const parent2Color = document.getElementById('parent2').value.toLowerCase();
-
-      // Voeg hier je genetische berekeningslogica toe om de mogelijke oogkleuren van de kinderen te bepalen
-      let possibleEyeColors = calculatePossibleEyeColors(parent1Color, parent2Color);
-
-      // Toon het resultaat in het HTML-element met id "result"
-      document.getElementById('result').innerText = 'Mogelijke oogkleuren van kinderen: ' + possibleEyeColors.join(', ');
-    }
-
-    function calculatePossibleEyeColors(parent1Color, parent2Color) {
-      // Genetische berekeningslogica op basis van de gegeven tabel
-      // Pas dit aan volgens je eigen logica
-
-      let possibleEyeColors = [];
-
-      // Voor dit eenvoudige voorbeeld nemen we slechts één mogelijk resultaat
-      possibleEyeColors.push('Groen');
-
-      return possibleEyeColors;
-    }
-  </script>
 </body>
 </html>
