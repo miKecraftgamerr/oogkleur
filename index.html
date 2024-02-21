@@ -6,7 +6,7 @@
   <title>Oogkleur Berekenaar</title>
 </head>
 <body>
-  <h1>Oogkleur Berekenaar</h1>
+  <h1>sOogkleur Berekenaar</h1>
 
   <form method="POST">
     <label for="parent1">Oogkleur Mama</label>
@@ -26,7 +26,7 @@
     <button type="submit">Bereken De Oogkleuren</button>
   </form>
 
-  {% if child_eye_colors %}
+  {% if child_eye_colors is defined %}
     <div id="result">
       <h2>Mogelijke Oogkleuren van de Kinderen:</h2>
       <ul>
