@@ -3,70 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Oogkleur Berekenaar</title>
+  <title>ffOogkleur Berekenaar</title>
   <script>
     function calculateEyeColors() {
       var parent1Color = document.getElementById('parent1').value.toLowerCase();
       var parent2Color = document.getElementById('parent2').value.toLowerCase();
+      var inLaw1Color = document.getElementById('inLaw1').value.toLowerCase();
+      var inLaw2Color = document.getElementById('inLaw2').value.toLowerCase();
 
-      // Genetische berekeningen op basis van de gegeven tabel
-      var kansOpBruin = 0;
-      var kansOpGroen = 0;
-      var kansOpBlauw = 0;
+      // Genetische berekeningen op basis van de gegeven tabel voor jouw oogkleur
+      var kansOpJouwBruin = 0;
+      var kansOpJouwGroen = 0;
+      var kansOpJouwBlauw = 0;
 
-      // Bruin + bruin
-      if ((parent1Color === "bruin" && parent2Color === "bruin")) {
-        kansOpBruin = 75;
-        kansOpGroen = 18.75;
-        kansOpBlauw = 6.25;
-      }
+      // Plaats hier je genetische berekeningen voor jouw oogkleur
+      // ...
 
-      // Groen + bruin of Bruin + groen
-      else if ((parent1Color === "groen" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "groen")) {
-        kansOpBruin = 50;
-        kansOpGroen = 37.5;
-        kansOpBlauw = 12.5;
-      }
+      // Genetische berekeningen op basis van de gegeven tabel voor oogkleur van je vrouw
+      var kansOpVrouwBruin = 0;
+      var kansOpVrouwGroen = 0;
+      var kansOpVrouwBlauw = 0;
 
-      // Blauw + bruin of Bruin + blauw
-      else if ((parent1Color === "blauw" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "blauw")) {
-        kansOpBruin = 50;
-        kansOpGroen = 0;
-        kansOpBlauw = 50;
-      }
+      // Plaats hier je genetische berekeningen voor oogkleur van je vrouw
+      // ...
 
-      // Groen + groen
-      else if (parent1Color === "groen" && parent2Color === "groen") {
-        kansOpBruin = 0.01; // Minder dan 1%
-        kansOpGroen = 75;
-        kansOpBlauw = 25;
-      }
+      // Toon resultaat voor jouw oogkleur
+      showResults('Jou', [kansOpJouwBruin.toFixed(2) + "%", kansOpJouwGroen.toFixed(2) + "%", kansOpJouwBlauw.toFixed(2) + "%"]);
 
-      // Groen + blauw of Blauw + groen
-      else if ((parent1Color === "groen" && parent2Color === "blauw") || (parent1Color === "blauw" && parent2Color === "groen")) {
-        kansOpBruin = 0;
-        kansOpGroen = 50;
-        kansOpBlauw = 50;
-      }
-
-      // Blauw + blauw
-      else if (parent1Color === "blauw" && parent2Color === "blauw") {
-        kansOpBruin = 0;
-        kansOpGroen = 1;
-        kansOpBlauw = 99;
-      }
-
-      // Toon resultaat
-      showResults([kansOpBruin.toFixed(2) + "%", kansOpGroen.toFixed(2) + "%", kansOpBlauw.toFixed(2) + "%"]);
+      // Toon resultaat voor oogkleur van je vrouw
+      showResults('Jouw Vrouw', [kansOpVrouwBruin.toFixed(2) + "%", kansOpVrouwGroen.toFixed(2) + "%", kansOpVrouwBlauw.toFixed(2) + "%"]);
     }
 
-    function showResults(childEyeColors) {
+    function showResults(person, eyeColors) {
       var resultDiv = document.getElementById('result');
-      resultDiv.innerHTML = '<h2>Kansen op Oogkleuren van de Kinderen:</h2><ul>';
+      resultDiv.innerHTML += '<h2>Kansen op Oogkleuren van ' + person + ':</h2><ul>';
 
-      for (var i = 0; i < childEyeColors.length; i++) {
-        resultDiv.innerHTML += '<li>' + childEyeColors[i] + '</li>';
-      }
+      resultDiv.innerHTML += '<li>Bruin: ' + eyeColors[0] + '</li>';
+      resultDiv.innerHTML += '<li>Groen: ' + eyeColors[1] + '</li>';
+      resultDiv.innerHTML += '<li>Blauw: ' + eyeColors[2] + '</li>';
 
       resultDiv.innerHTML += '</ul>';
     }
@@ -85,6 +59,20 @@
 
     <label for="parent2">Oogkleur Papa</label>
     <select name="parent2" id="parent2" required>
+      <option value="bruin">Bruin</option>
+      <option value="groen">Groen</option>
+      <option value="blauw">Blauw</option>
+    </select>
+
+    <label for="inLaw1">Oogkleur Schoonmama</label>
+    <select name="inLaw1" id="inLaw1" required>
+      <option value="bruin">Bruin</option>
+      <option value="groen">Groen</option>
+      <option value="blauw">Blauw</option>
+    </select>
+
+    <label for="inLaw2">Oogkleur Schoonpapa</label>
+    <select name="inLaw2" id="inLaw2" required>
       <option value="bruin">Bruin</option>
       <option value="groen">Groen</option>
       <option value="blauw">Blauw</option>
