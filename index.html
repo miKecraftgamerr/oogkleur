@@ -4,11 +4,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Oogkleur Berekenaar</title>
+  <script>
+    function showResults(childEyeColors) {
+      var resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '<h2>Mogelijke Oogkleuren van de Kinderen:</h2><ul>';
+
+      if (childEyeColors) {
+        for (var i = 0; i < childEyeColors.length; i++) {
+          resultDiv.innerHTML += '<li>' + childEyeColors[i] + '</li>';
+        }
+      } else {
+        resultDiv.innerHTML += '<li>Geen resultaten beschikbaar.</li>';
+      }
+
+      resultDiv.innerHTML += '</ul>';
+    }
+  </script>
 </head>
 <body>
   <h1>Oogkleur Berekenaar</h1>
 
-  <form method="POST">
+  <form method="POST" onsubmit="event.preventDefault(); calculateEyeColors();">
     <label for="parent1">Oogkleur Mama</label>
     <select name="parent1" required>
       <option value="Bruin">Bruin</option>
@@ -26,20 +42,32 @@
     <button type="submit">Bereken De Oogkleuren</button>
   </form>
 
-  <div id="result">
-    <h2>Mogelijke Oogkleuren van de Kinderen:</h2>
-    <ul>
-      <!-- De volgende regels worden alleen weergegeven als child_eye_colors bestaat -->
-      <!-- en als het niet leeg is -->
-      {% if child_eye_colors %}
-        {% for color in child_eye_colors %}
-          <li>{{ color }}</li>
-        {% endfor %}
-      {% else %}
-        <li>Geen resultaten beschikbaar.</li>
-      {% endif %}
-    </ul>
-  </div>
+  <div id="result"></div>
 
+  <script>
+    function calculateEyeColors() {
+      // Plaats hier je genetische berekeningen
+
+      // Bijvoorbeeld:
+      var childEyeColors = ['Groen', 'Blauw'];  // Vervang dit met je eigen berekeningen
+
+      showResults(childEyeColors);
+    }
+
+    function showResults(childEyeColors) {
+      var resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = '<h2>Mogelijke Oogkleuren van de Kinderen:</h2><ul>';
+
+      if (childEyeColors) {
+        for (var i = 0; i < childEyeColors.length; i++) {
+          resultDiv.innerHTML += '<li>' + childEyeColors[i] + '</li>';
+        }
+      } else {
+        resultDiv.innerHTML += '<li>Geen resultaten beschikbaar.</li>';
+      }
+
+      resultDiv.innerHTML += '</ul>';
+    }
+  </script>
 </body>
 </html>
