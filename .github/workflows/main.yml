@@ -1,27 +1,12 @@
-name: Run Python script
+- name: Install dependencies
+  run: |
+    python -m pip install --upgrade pip
+    echo "Installing dependencies..."
+    pip install -r requirements.txt
+    echo "Dependencies installed."
 
-on:
-  push:
-    branches:
-      - main
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-
-    - name: Set up Python
-      uses: actions/setup-python@v2
-      with:
-        python-version: 3.x
-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Als je externe bibliotheken hebt in app.py
-
-    - name: Run Python script
-      run: python app.py
+- name: Run Python script
+  run: |
+    echo "Running Python script..."
+    python app.py
+    echo "Python script completed."
