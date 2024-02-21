@@ -1,1 +1,81 @@
-<h1>Hello!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oogkleur Berekenaar</title>
+  <style>
+    /* Voeg hier je CSS-styling toe */
+  </style>
+</head>
+<body>
+  <h1>Oogkleur Berekenaar</h1>
+
+  <form id="eyeColorForm">
+    <label for="parent1">Oogkleur Mama</label>
+    <select name="parent1" id="parent1" required>
+        <option value="Bruin">Bruin</option>
+        <option value="Groen">Groen</option>
+        <option value="Blauw">Blauw</option>
+    </select>
+
+    <label for="parent2">Oogkleur Papa</label>
+    <select name="parent2" id="parent2" required>
+        <option value="Bruin">Bruin</option>
+        <option value="Groen">Groen</option>
+        <option value="Blauw">Blauw</option>
+    </select>
+
+    <label for="inLaw1">Oogkleur Schoonmama</label>
+    <select name="inLaw1" id="inLaw1" required>
+        <option value="Bruin">Bruin</option>
+        <option value="Groen">Groen</option>
+        <option value="Blauw">Blauw</option>
+    </select>
+
+    <label for="inLaw2">Oogkleur Schoonpapa</label>
+    <select name="inLaw2" id="inLaw2" required>
+        <option value="Bruin">Bruin</option>
+        <option value="Groen">Groen</option>
+        <option value="Blauw">Blauw</option>
+    </select>
+
+    <button type="button" onclick="calculateEyeColors()">Bereken De Oogkleuren</button>
+  </form>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateEyeColors() {
+      // Haal de ingevoerde oogkleuren op
+      const parent1Color = document.getElementById('parent1').value.toLowerCase();
+      const parent2Color = document.getElementById('parent2').value.toLowerCase();
+      const inLaw1Color = document.getElementById('inLaw1').value.toLowerCase();
+      const inLaw2Color = document.getElementById('inLaw2').value.toLowerCase();
+
+      // Roep Python-functie aan om genetische berekeningen uit te voeren
+      fetch(`/calculate_eye_colors?parent1=${parent1Color}&parent2=${parent2Color}&inLaw1=${inLaw1Color}&inLaw2=${inLaw2Color}`)
+        .then(response => response.json())
+        .then(data => {
+          // Toon resultaat in de console
+          console.log("Oogkleur Mama: " + parent1Color);
+          console.log("Oogkleur Papa: " + parent2Color);
+          console.log("Oogkleur Schoonmama: " + inLaw1Color);
+          console.log("Oogkleur Schoonpapa: " + inLaw2Color);
+
+          console.log("Kans op Bruine ogen: " + data.kansOpBruin.toFixed(2) + "%");
+          console.log("Kans op Groene ogen: " + data.kansOpGroen.toFixed(2) + "%");
+          console.log("Kans op Blauwe ogen: " + data.kansOpBlauw.toFixed(2) + "%");
+          
+          // Update het resultaat in het HTML-element met id "result"
+          document.getElementById('result').innerHTML = `
+            <p>Kans op Bruine ogen: ${data.kansOpBruin.toFixed(2)}%</p>
+            <p>Kans op Groene ogen: ${data.kansOpGroen.toFixed(2)}%</p>
+            <p>Kans op Blauwe ogen: ${data.kansOpBlauw.toFixed(2)}%</p>
+          `;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
+</body>
+</html>
