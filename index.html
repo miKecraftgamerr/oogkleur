@@ -11,73 +11,119 @@
       var inLaw1Color = document.getElementById('inLaw1').value.toLowerCase();
       var inLaw2Color = document.getElementById('inLaw2').value.toLowerCase();
 
-      // Genetische berekeningen op basis van de gegeven tabel
-      var kansOpBruinOuder = 0;
-      var kansOpGroenOuder = 0;
-      var kansOpBlauwOuder = 0;
+      // Genetische berekeningen op basis van de gegeven tabel voor "Ik"
+      var kansOpBruinIk = 0;
+      var kansOpGroenIk = 0;
+      var kansOpBlauwIk = 0;
 
       // Bruin + bruin
-      if ((parent1Color === "bruin" && parent2Color === "bruin")) {
-        kansOpBruinOuder = 75;
-        kansOpGroenOuder = 18.75;
-        kansOpBlauwOuder = 6.25;
+      if ((parent1Color === "bruin" && inLaw1Color === "bruin") || (parent1Color === "bruin" && inLaw2Color === "bruin")) {
+        kansOpBruinIk = 75;
+        kansOpGroenIk = 18.75;
+        kansOpBlauwIk = 6.25;
       }
 
       // Groen + bruin of Bruin + groen
-      else if ((parent1Color === "groen" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "groen")) {
-        kansOpBruinOuder = 50;
-        kansOpGroenOuder = 37.5;
-        kansOpBlauwOuder = 12.5;
+      else if ((parent1Color === "groen" && inLaw1Color === "bruin") || (parent1Color === "bruin" && inLaw1Color === "groen")) {
+        kansOpBruinIk = 50;
+        kansOpGroenIk = 37.5;
+        kansOpBlauwIk = 12.5;
       }
 
       // Blauw + bruin of Bruin + blauw
-      else if ((parent1Color === "blauw" && parent2Color === "bruin") || (parent1Color === "bruin" && parent2Color === "blauw")) {
-        kansOpBruinOuder = 50;
-        kansOpGroenOuder = 0;
-        kansOpBlauwOuder = 50;
+      else if ((parent1Color === "blauw" && inLaw1Color === "bruin") || (parent1Color === "bruin" && inLaw1Color === "blauw")) {
+        kansOpBruinIk = 50;
+        kansOpGroenIk = 0;
+        kansOpBlauwIk = 50;
       }
 
       // Groen + groen
-      else if (parent1Color === "groen" && parent2Color === "groen") {
-        kansOpBruinOuder = 0.01; // Minder dan 1%
-        kansOpGroenOuder = 75;
-        kansOpBlauwOuder = 25;
+      else if (parent1Color === "groen" && inLaw1Color === "groen") {
+        kansOpBruinIk = 0.01; // Minder dan 1%
+        kansOpGroenIk = 75;
+        kansOpBlauwIk = 24.99; // Zodat het totaal 100% is
       }
 
       // Groen + blauw of Blauw + groen
-      else if ((parent1Color === "groen" && parent2Color === "blauw") || (parent1Color === "blauw" && parent2Color === "groen")) {
-        kansOpBruinOuder = 0;
-        kansOpGroenOuder = 50;
-        kansOpBlauwOuder = 50;
+      else if ((parent1Color === "groen" && inLaw1Color === "blauw") || (parent1Color === "blauw" && inLaw1Color === "groen")) {
+        kansOpBruinIk = 0;
+        kansOpGroenIk = 50;
+        kansOpBlauwIk = 50;
       }
 
       // Blauw + blauw
-      else if (parent1Color === "blauw" && parent2Color === "blauw") {
-        kansOpBruinOuder = 0;
-        kansOpGroenOuder = 1;
-        kansOpBlauwOuder = 99;
+      else if (parent1Color === "blauw" && inLaw1Color === "blauw") {
+        kansOpBruinIk = 0;
+        kansOpGroenIk = 1;
+        kansOpBlauwIk = 99;
       }
 
-      // Toon resultaat voor de ouders
-      showResults("Oogkleur Mama", parent1Color, kansOpBruinOuder, kansOpGroenOuder, kansOpBlauwOuder);
+      // Toon resultaat voor "Ik"
+      showResults("Oogkleur Ik", parent1Color, kansOpBruinIk, kansOpGroenIk, kansOpBlauwIk);
 
-      // Voeg hier je eigen genetische berekeningslogica toe voor de kinderen
-      // Bijvoorbeeld, je zou hier een functie kunnen aanroepen die de kans op oogkleuren van de kinderen berekent
-      // en de resultaten weergeven op een vergelijkbare manier.
+      // Genetische berekeningen op basis van de gegeven tabel voor "Mijn Vrouw"
+      var kansOpBruinVrouw = 0;
+      var kansOpGroenVrouw = 0;
+      var kansOpBlauwVrouw = 0;
 
-      // In dit voorbeeld tonen we gewoon willekeurige kansen voor de kinderen
-      var kansOpBruinKind = Math.random() * 100;
-      var kansOpGroenKind = Math.random() * 100;
-      var kansOpBlauwKind = Math.random() * 100;
+      // Bruin + bruin
+      if ((parent2Color === "bruin" && inLaw2Color === "bruin") || (parent2Color === "bruin" && inLaw1Color === "bruin")) {
+        kansOpBruinVrouw = 75;
+        kansOpGroenVrouw = 18.75;
+        kansOpBlauwVrouw = 6.25;
+      }
 
-      // Toon de kansen voor de kinderen
-      showResults("Oogkleur Kinderen", "Willekeurig", kansOpBruinKind, kansOpGroenKind, kansOpBlauwKind);
+      // Groen + bruin of Bruin + groen
+      else if ((parent2Color === "groen" && inLaw2Color === "bruin") || (parent2Color === "bruin" && inLaw2Color === "groen")) {
+        kansOpBruinVrouw = 50;
+        kansOpGroenVrouw = 37.5;
+        kansOpBlauwVrouw = 12.5;
+      }
+
+      // Blauw + bruin of Bruin + blauw
+      else if ((parent2Color === "blauw" && inLaw2Color === "bruin") || (parent2Color === "bruin" && inLaw2Color === "blauw")) {
+        kansOpBruinVrouw = 50;
+        kansOpGroenVrouw = 0;
+        kansOpBlauwVrouw = 50;
+      }
+
+      // Groen + groen
+      else if (parent2Color === "groen" && inLaw2Color === "groen") {
+        kansOpBruinVrouw = 0.01; // Minder dan 1%
+        kansOpGroenVrouw = 75;
+        kansOpBlauwVrouw = 24.99; // Zodat het totaal 100% is
+      }
+
+      // Groen + blauw of Blauw + groen
+      else if ((parent2Color === "groen" && inLaw2Color === "blauw") || (parent2Color === "blauw" && inLaw2Color === "groen")) {
+        kansOpBruinVrouw = 0;
+        kansOpGroenVrouw = 50;
+        kansOpBlauwVrouw = 50;
+      }
+
+      // Blauw + blauw
+      else if (parent2Color === "blauw" && inLaw2Color === "blauw") {
+        kansOpBruinVrouw = 0;
+        kansOpGroenVrouw = 1;
+        kansOpBlauwVrouw = 99;
+      }
+
+      // Toon resultaat voor "Mijn Vrouw"
+      showResults("Oogkleur Mijn Vrouw", parent2Color, kansOpBruinVrouw, kansOpGroenVrouw, kansOpBlauwVrouw);
+
+      // Genetische berekeningen voor de kinderen
+      var kansOpBruinKind = (kansOpBruinIk + kansOpBruinVrouw) / 2;
+      var kansOpGroenKind = (kansOpGroenIk + kansOpGroenVrouw) / 2;
+      var kansOpBlauwKind = (kansOpBlauwIk + kansOpBlauwVrouw) / 2;
+
+      // Toon resultaat voor de kinderen
+      showResults("Mogelijke Oogkleuren van de Kinderen", "", kansOpBruinKind, kansOpGroenKind, kansOpBlauwKind);
     }
 
+    // Functie om de resultaten te tonen
     function showResults(ouderType, ouderColor, kansOpBruin, kansOpGroen, kansOpBlauw) {
       var resultDiv = document.getElementById('result');
-      resultDiv.innerHTML += '<h2>Kansen op Oogkleuren:</h2>';
-      
+
       // Toon de kansen voor de ouder
       resultDiv.innerHTML += '<h3>' + ouderType + ' (' + capitalizeFirstLetter(ouderColor) + '):</h3>';
       resultDiv.innerHTML += '<ul>';
@@ -97,28 +143,28 @@
   <h1>Oogkleur Berekenaar</h1>
 
   <form onsubmit="event.preventDefault(); calculateEyeColors();">
-    <label for="parent1">Oogkleur Mama</label>
+    <label for="parent1">Oogkleur Ouder 1</label>
     <select name="parent1" id="parent1" required>
       <option value="bruin">Bruin</option>
       <option value="groen">Groen</option>
       <option value="blauw">Blauw</option>
     </select>
 
-    <label for="parent2">Oogkleur Papa</label>
+    <label for="parent2">Oogkleur Ouder 2</label>
     <select name="parent2" id="parent2" required>
       <option value="bruin">Bruin</option>
       <option value="groen">Groen</option>
       <option value="blauw">Blauw</option>
     </select>
 
-    <label for="inLaw1">Oogkleur Schoonmama</label>
+    <label for="inLaw1">Oogkleur Ouder 3</label>
     <select name="inLaw1" id="inLaw1" required>
       <option value="bruin">Bruin</option>
       <option value="groen">Groen</option>
       <option value="blauw">Blauw</option>
     </select>
 
-    <label for="inLaw2">Oogkleur Schoonpapa</label>
+    <label for="inLaw2">Oogkleur Ouder 4</label>
     <select name="inLaw2" id="inLaw2" required>
       <option value="bruin">Bruin</option>
       <option value="groen">Groen</option>
