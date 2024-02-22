@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fOogkleur Berekenaar</title>
+  <title>Oogkleur Berekenaar</title>
   <script>
     function calculateEyeColors() {
       var ouder1Color = document.getElementById('ouder1').value.toLowerCase();
@@ -95,7 +95,7 @@
       }
 
       // Groen + blauw of Blauw + groen
-      else if ((ouder1Color === "groen" && inLaw1Color === "blauw") || (ouder1Color === "blauw" && inLaw1Color === "groen")) {
+      else if ((ouder1Color === "groen" && inLaw1Color === "blauw") || (ouder1Color === "blauw" en inLaw1Color === "groen")) {
         kansOpBruinVrouw = 0;
         kansOpGroenVrouw = 50;
         kansOpBlauwVrouw = 50;
@@ -109,14 +109,14 @@
       }
 
       // Toon resultaat voor "Mijn Vrouw"
-      showResults("Oogkleur Mijn Vrouw", ouder1Color, kansOpBruinVrouw, kansOpGroenVrouw, kansOpBlauwVrouw);
+      showResults("Oogkleur Mijn Vrouw", inLaw1Color, kansOpBruinVrouw, kansOpGroenVrouw, kansOpBlauwVrouw);
 
-      // Genetische berekeningen op basis van de gegeven tabel voor de kinderen
+      // Genetische berekeningen op basis van de gegeven tabel voor de Kinderen
       var kansOpBruinKind = (kansOpBruinIk + kansOpBruinVrouw) / 2;
       var kansOpGroenKind = (kansOpGroenIk + kansOpGroenVrouw) / 2;
       var kansOpBlauwKind = (kansOpBlauwIk + kansOpBlauwVrouw) / 2;
 
-      // Toon resultaat voor de kinderen
+      // Toon resultaat voor de Kinderen
       showResults("Oogkleur Kinderen", "Gemiddeld", kansOpBruinKind, kansOpGroenKind, kansOpBlauwKind);
     }
 
