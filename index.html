@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fOogkleur Berekenaar</title>
+  <title>sOogkleur Berekenaar</title>
   <script>
     function calculateEyeColors() {
       var ouder1Color = document.getElementById('ouder1').value.toLowerCase();
@@ -67,49 +67,49 @@
       var kansOpBlauwVrouw = 0;
 
       // Bruin + bruin
-      if ((ouder1Color === "bruin" && inLaw1Color === "bruin") || (ouder1Color === "bruin" && inLaw2Color === "bruin")) {
+      if ((inLaw1Color === "bruin" && inLaw2Color === "bruin") || (inLaw2Color === "bruin" && inLaw1Color === "bruin")) {
         kansOpBruinVrouw = 75;
         kansOpGroenVrouw = 18.75;
-        kansOpBlauwVrouw = 6.25;
+        kansOpBlauwVrouw = 6.5;
       }
 
       // Groen + bruin of Bruin + groen
-      else if ((ouder1Color === "groen" && inLaw1Color === "bruin") || (ouder1Color === "bruin" && inLaw1Color === "groen")) {
+      else if ((inLaw1Color === "groen" && inLaw2Color === "bruin") || (inLaw1Color === "bruin" && inLaw2Color === "groen")) {
         kansOpBruinVrouw = 50;
         kansOpGroenVrouw = 37.5;
         kansOpBlauwVrouw = 12.5;
       }
 
       // Blauw + bruin of Bruin + blauw
-      else if ((ouder1Color === "blauw" && inLaw1Color === "bruin") || (ouder1Color === "bruin" && inLaw1Color === "blauw")) {
+      else if ((inLaw1Color === "blauw" && inLaw2Color === "bruin") || (inLaw1Color === "bruin" && inLaw2Color === "blauw")) {
         kansOpBruinVrouw = 50;
         kansOpGroenVrouw = 0;
         kansOpBlauwVrouw = 50;
       }
 
       // Groen + groen
-      else if (ouder1Color === "groen" && inLaw1Color === "groen") {
+      else if (inLaw1Color === "groen" && inLaw2Color === "groen") {
         kansOpBruinVrouw = 0.01; // Minder dan 1%
         kansOpGroenVrouw = 75;
         kansOpBlauwVrouw = 24.99; // Zodat het totaal 100% is
       }
 
       // Groen + blauw of Blauw + groen
-      else if ((ouder1Color === "groen" && inLaw1Color === "blauw") || (ouder1Color === "blauw" && inLaw1Color === "groen")) {
+      else if ((inLaw1Color === "groen" && inLaw2Color === "blauw") || (inLaw1Color === "blauw" && inLaw2Color === "groen")) {
         kansOpBruinVrouw = 0;
         kansOpGroenVrouw = 50;
         kansOpBlauwVrouw = 50;
       }
 
       // Blauw + blauw
-      else if (ouder1Color === "blauw" && inLaw1Color === "blauw") {
+      else if (inLaw1Color === "blauw" && inLaw2Color === "blauw") {
         kansOpBruinVrouw = 0;
         kansOpGroenVrouw = 1;
         kansOpBlauwVrouw = 99;
       }
 
       // Toon resultaat voor "Mijn Vrouw"
-      showResults("Oogkleur Mijn Vrouw", inLaw1Color, kansOpBruinVrouw, kansOpGroenVrouw, kansOpBlauwVrouw);
+      showResults("Oogkleur Mijn Vrouw:\n", "Bruin: "+kansOpBruinVrouw+"%\n", "Groen: "+kansOpGroenVrouw+"%\n", "Blauw: "+kansOpBlauwVrouw+"%\n");
 
       // Genetische berekeningen op basis van de gegeven tabel voor de Kinderen
       var kansOpBruinKind = (kansOpBruinIk + kansOpBruinVrouw) / 2;
