@@ -17,10 +17,10 @@
       var kansOpBlauwIk = 0;
 
       // Bruin + bruin
-      if ((ouder1Color === "bruin" && ouder2Color === "bruin") || (ouder1Color === "bruin" && ouder2Color === "bruin")) {
+      if ((ouder1Color === "bruin" && ouder2Color === "bruin") || (ouder2Color === "bruin" && ouder1Color === "bruin")) {
         kansOpBruinIk = 75;
         kansOpGroenIk = 18.75;
-        kansOpBlauwIk = 6.25;
+        kansOpBlauwIk = 6.5;
       }
 
       // Groen + bruin of Bruin + groen
@@ -59,7 +59,7 @@
       }
 
       // Toon resultaat voor "Ik"
-      showResults("Oogkleur Ik", ouder1Color, kansOpBruinIk, kansOpGroenIk, kansOpBlauwIk);
+      console.log("Oogkleur Ik","Bruin: "+kansOpBruinIk, "Groen: "+kansOpGroenIk,"Blauw: "+kansOpBlauwIk);
 
       // Genetische berekeningen op basis van de gegeven tabel voor "Mijn Vrouw"
       var kansOpBruinVrouw = 0;
