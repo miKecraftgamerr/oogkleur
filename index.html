@@ -111,54 +111,55 @@
       // Toon resultaat voor "Mijn Vrouw"
       showResults("Oogkleur Mijn Vrouw", ouder1Color, kansOpBruinVrouw, kansOpGroenVrouw, kansOpBlauwVrouw);
 
-      // Voeg hier je eigen genetische berekeningslogica toe voor de kinderen
-      // Update het resultaat in het HTML-element met id "result"
+      // Genetische berekeningen op basis van de gegeven tabel voor de kinderen
+      var kansOpBruinKind = (kansOpBruinIk + kansOpBruinVrouw) / 2;
+      var kansOpGroenKind = (kansOpGroenIk + kansOpGroenVrouw) / 2;
+      var kansOpBlauwKind = (kansOpBlauwIk + kansOpBlauwVrouw) / 2;
+
+      // Toon resultaat voor de kinderen
+      showResults("Oogkleur Kinderen", "Gemiddeld", kansOpBruinKind, kansOpGroenKind, kansOpBlauwKind);
     }
 
     function showResults(title, color, kansOpBruin, kansOpGroen, kansOpBlauw) {
-      console.log(title + ": " + color);
-      console.log("Kans op Bruine ogen " + title + ": " + kansOpBruin.toFixed(2) + "%");
-      console.log("Kans op Groene ogen " + title + ": " + kansOpGroen.toFixed(2) + "%");
-      console.log("Kans op Blauwe ogen " + title + ": " + kansOpBlauw.toFixed(2) + "%");
-      console.log("\n");
+      document.getElementById('resultaat').innerHTML = title + ":<br>" +
+        "Oogkleur: " + color + "<br>" +
+        "Kans op bruine ogen: " + kansOpBruin.toFixed(2) + "%<br>" +
+        "Kans op groene ogen: " + kansOpGroen.toFixed(2) + "%<br>" +
+        "Kans op blauwe ogen: " + kansOpBlauw.toFixed(2) + "%";
     }
   </script>
 </head>
 <body>
   <h1>Oogkleur Berekenaar</h1>
+  <label for="ouder1">Oogkleur Ouder 1:</label>
+  <select id="ouder1">
+    <option value="bruin">Bruin</option>
+    <option value="groen">Groen</option>
+    <option value="blauw">Blauw</option>
+  </select><br>
 
-  <form id="eyeColorForm">
-    <label for="ouder1">Oogkleur Ouder 1</label>
-    <select name="ouder1" id="ouder1" required>
-        <option value="Bruin">Bruin</option>
-        <option value="Groen">Groen</option>
-        <option value="Blauw">Blauw</option>
-    </select>
+  <label for="ouder2">Oogkleur Ouder 2:</label>
+  <select id="ouder2">
+    <option value="bruin">Bruin</option>
+    <option value="groen">Groen</option>
+    <option value="blauw">Blauw</option>
+  </select><br>
 
-    <label for="ouder2">Oogkleur Ouder 2</label>
-    <select name="ouder2" id="ouder2" required>
-        <option value="Bruin">Bruin</option>
-        <option value="Groen">Groen</option>
-        <option value="Blauw">Blauw</option>
-    </select>
+  <label for="inLaw1">Oogkleur Schoonouder 1:</label>
+  <select id="inLaw1">
+    <option value="bruin">Bruin</option>
+    <option value="groen">Groen</option>
+    <option value="blauw">Blauw</option>
+  </select><br>
 
-    <label for="inLaw1">Oogkleur Schoonouder 1</label>
-    <select name="inLaw1" id="inLaw1" required>
-        <option value="Bruin">Bruin</option>
-        <option value="Groen">Groen</option>
-        <option value="Blauw">Blauw</option>
-    </select>
+  <label for="inLaw2">Oogkleur Schoonouder 2:</label>
+  <select id="inLaw2">
+    <option value="bruin">Bruin</option>
+    <option value="groen">Groen</option>
+    <option value="blauw">Blauw</option>
+  </select><br>
 
-    <label for="inLaw2">Oogkleur Schoonouder 2</label>
-    <select name="inLaw2" id="inLaw2" required>
-        <option value="Bruin">Bruin</option>
-        <option value="Groen">Groen</option>
-        <option value="Blauw">Blauw</option>
-    </select>
-
-    <button type="button" onclick="calculateEyeColors()">Bereken De Oogkleuren</button>
-  </form>
-
-  <div id="result"></div>
+  <button onclick="calculateEyeColors()">Bereken De Oogkleuren</button>
+  <div id="resultaat"></div>
 </body>
 </html>
